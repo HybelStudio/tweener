@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Hybel
+namespace Hybel.Tweener
 {
     public class TweenTransformer : MonoBehaviour
     {

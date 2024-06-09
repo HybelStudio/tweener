@@ -1,35 +1,35 @@
 ﻿using System;
+using UnityEngine;
 
-namespace Hybel
+namespace Hybel.Tweener
 {
     public partial class Interpolate
     {
-        public class ScaledConstraint<TBuilder, TBuildConstraint> : IModifierConstraint
+        public class SpikedConstraint<TBuilder, TBuildConstraint> : IModifierConstraint
             where TBuilder : IBuilder
             where TBuildConstraint : IBuildConstraint<TBuilder>
         {
             private readonly TBuilder _builder;
-            private readonly float _scale;
+            private readonly float _bias;
+            private readonly int _spikes;
             private readonly EaseFunction _modifier;
 
-            public WrappedConstraint<TBuilder, TBuildConstraint> Wrap() =>
-                new WrappedConstraint<TBuilder, TBuildConstraint>(_builder, GetEase());
+            public SpikedConstraint(TBuilder builder, float bias = .5f, int spikes = 1, EaseFunction modifier = null)
+            {
+                _builder = builder;
+                _bias = bias;
+                _spikes = Mathf.Abs(spikes);
+                _modifier = modifier;
+            }
 
             public FlippedConstraint<TBuilder, TBuildConstraint> Flip(float threshold = 0f) =>
                 new FlippedConstraint<TBuilder, TBuildConstraint>(_builder, threshold, GetEase());
 
-            public SpikedConstraint<TBuilder, TBuildConstraint> Spike(float split = .5f, int spikes = 1) =>
-                new SpikedConstraint<TBuilder, TBuildConstraint>(_builder, split, spikes, GetEase());
-
             public ZoomConstraint<TBuilder, TBuildConstraint> Zoom(float zoom = 1) =>
                 new ZoomConstraint<TBuilder, TBuildConstraint>(_builder, zoom, GetEase());
 
-            public ScaledConstraint(TBuilder builder, float scale = 1f, EaseFunction modifier = null)
-            {
-                _builder = builder;
-                _scale = scale;
-                _modifier = modifier;
-            }
+            public ScaledConstraint<TBuilder, TBuildConstraint> Scale(float scale = 1) =>
+                new ScaledConstraint<TBuilder, TBuildConstraint>(_builder, scale, GetEase());
 
             public TBuildConstraint Round() => CreateConstraint(Interpolate.Clamp);
             public TBuildConstraint Linear() => CreateConstraint(Interpolate.Linear);
@@ -49,7 +49,7 @@ namespace Hybel
             public TBuildConstraint Triangle() => CreateConstraint(Interpolate.Triangle);
             public TBuildConstraint SmoothStep() => CreateConstraint(Interpolate.SmoothStep);
 
-            public EaseFunction GetEase() => t => Interpolate.ScaleUp(_modifier?.Invoke(t) ?? t, _scale);
+            public EaseFunction GetEase() => t => Interpolate.Spiked(_modifier?.Invoke(t) ?? t, _bias, _spikes);
 
             private TBuildConstraint CreateConstraint(EaseFunction easeFunc) =>
                 (TBuildConstraint)Activator.CreateInstance(typeof(TBuildConstraint),

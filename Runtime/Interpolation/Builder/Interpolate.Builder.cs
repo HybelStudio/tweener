@@ -1,4 +1,4 @@
-﻿namespace Hybel
+﻿namespace Hybel.Tweener
 {
     public partial class Interpolate
     {
@@ -177,23 +177,23 @@
         {
             return ease switch
             {
-                Hybel.Ease.Clamp => Clamp,
-                Hybel.Ease.Linear => Linear,
-                Hybel.Ease.SineIn or Hybel.Ease.SineOut or Hybel.Ease.SineInOut => SineIn,
-                Hybel.Ease.QuadIn or Hybel.Ease.QuadOut or Hybel.Ease.QuadInOut => QuadIn,
-                Hybel.Ease.CubeIn or Hybel.Ease.CubeOut or Hybel.Ease.CubeInOut => CubeIn,
-                Hybel.Ease.QuartIn or Hybel.Ease.QuartOut or Hybel.Ease.QuartInOut => QuartIn,
-                Hybel.Ease.QuintIn or Hybel.Ease.QuintOut or Hybel.Ease.QuintInOut => QuintIn,
-                Hybel.Ease.SextIn or Hybel.Ease.SextOut or Hybel.Ease.SextInOut => SextIn,
-                Hybel.Ease.SeptIn or Hybel.Ease.SeptOut or Hybel.Ease.SeptInOut => SeptIn,
-                Hybel.Ease.OctIn or Hybel.Ease.OctOut or Hybel.Ease.OctInOut => OctIn,
-                Hybel.Ease.ExpoIn or Hybel.Ease.ExpoOut or Hybel.Ease.ExpoInOut => ExpoIn,
-                Hybel.Ease.CircIn or Hybel.Ease.CircOut or Hybel.Ease.CircInOut => CircIn,
-                Hybel.Ease.BackIn or Hybel.Ease.BackOut or Hybel.Ease.BackInOut => BackIn,
-                Hybel.Ease.ElasticIn or Hybel.Ease.ElasticOut or Hybel.Ease.ElasticInOut => ElasticIn,
-                Hybel.Ease.BounceIn or Hybel.Ease.BounceOut or Hybel.Ease.BounceInOut => BounceIn,
-                Hybel.Ease.Triangle => Triangle,
-                Hybel.Ease.SmoothStep => SmoothStep,
+                Hybel.Tweener.Ease.Clamp => Clamp,
+                Hybel.Tweener.Ease.Linear => Linear,
+                Hybel.Tweener.Ease.SineIn or Hybel.Tweener.Ease.SineOut or Hybel.Tweener.Ease.SineInOut => SineIn,
+                Hybel.Tweener.Ease.QuadIn or Hybel.Tweener.Ease.QuadOut or Hybel.Tweener.Ease.QuadInOut => QuadIn,
+                Hybel.Tweener.Ease.CubeIn or Hybel.Tweener.Ease.CubeOut or Hybel.Tweener.Ease.CubeInOut => CubeIn,
+                Hybel.Tweener.Ease.QuartIn or Hybel.Tweener.Ease.QuartOut or Hybel.Tweener.Ease.QuartInOut => QuartIn,
+                Hybel.Tweener.Ease.QuintIn or Hybel.Tweener.Ease.QuintOut or Hybel.Tweener.Ease.QuintInOut => QuintIn,
+                Hybel.Tweener.Ease.SextIn or Hybel.Tweener.Ease.SextOut or Hybel.Tweener.Ease.SextInOut => SextIn,
+                Hybel.Tweener.Ease.SeptIn or Hybel.Tweener.Ease.SeptOut or Hybel.Tweener.Ease.SeptInOut => SeptIn,
+                Hybel.Tweener.Ease.OctIn or Hybel.Tweener.Ease.OctOut or Hybel.Tweener.Ease.OctInOut => OctIn,
+                Hybel.Tweener.Ease.ExpoIn or Hybel.Tweener.Ease.ExpoOut or Hybel.Tweener.Ease.ExpoInOut => ExpoIn,
+                Hybel.Tweener.Ease.CircIn or Hybel.Tweener.Ease.CircOut or Hybel.Tweener.Ease.CircInOut => CircIn,
+                Hybel.Tweener.Ease.BackIn or Hybel.Tweener.Ease.BackOut or Hybel.Tweener.Ease.BackInOut => BackIn,
+                Hybel.Tweener.Ease.ElasticIn or Hybel.Tweener.Ease.ElasticOut or Hybel.Tweener.Ease.ElasticInOut => ElasticIn,
+                Hybel.Tweener.Ease.BounceIn or Hybel.Tweener.Ease.BounceOut or Hybel.Tweener.Ease.BounceInOut => BounceIn,
+                Hybel.Tweener.Ease.Triangle => Triangle,
+                Hybel.Tweener.Ease.SmoothStep => SmoothStep,
                 _ => Linear,
             };
         }

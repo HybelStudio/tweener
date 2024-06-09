@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hybel
+namespace Hybel.Tweener
 {
     public partial class Interpolate
     {

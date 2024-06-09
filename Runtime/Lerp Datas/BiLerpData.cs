@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Hybel
+namespace Hybel.Tweener
 {
     /// <summary>
     /// An object which has values for bi-linear interpolation.

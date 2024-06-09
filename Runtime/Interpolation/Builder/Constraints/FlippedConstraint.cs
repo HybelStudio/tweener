@@ -1,25 +1,23 @@
 ﻿using System;
 
-namespace Hybel
+namespace Hybel.Tweener
 {
     public partial class Interpolate
     {
-        public class WrappedConstraint<TBuilder, TBuildConstraint> : IModifierConstraint
+        public class FlippedConstraint<TBuilder, TBuildConstraint> : IModifierConstraint
             where TBuilder : IBuilder
             where TBuildConstraint : IBuildConstraint<TBuilder>
         {
             private readonly TBuilder _builder;
+            private readonly float _threshold;
+            private readonly EaseFunction _modifier;
 
-            public WrappedConstraint(TBuilder builder, EaseFunction modifier = null) => _builder = builder;
-
-            public FlippedConstraint<TBuilder, TBuildConstraint> Flip(float threshold = 0f) =>
-                new FlippedConstraint<TBuilder, TBuildConstraint>(_builder, threshold, GetEase());
-
-            public SpikedConstraint<TBuilder, TBuildConstraint> Spike(float split = .5f, int spikes = 1) =>
-                new SpikedConstraint<TBuilder, TBuildConstraint>(_builder, split, spikes, GetEase());
-
-            public ZoomConstraint<TBuilder, TBuildConstraint> Zoom(float zoom = 1) =>
-                new ZoomConstraint<TBuilder, TBuildConstraint>(_builder, zoom, GetEase());
+            public FlippedConstraint(TBuilder builder, float threshold = 0f, EaseFunction modifier = null)
+            {
+                _builder = builder;
+                _threshold = threshold;
+                _modifier = modifier;
+            }
 
             public ScaledConstraint<TBuilder, TBuildConstraint> Scale(float scale = 1) =>
                 new ScaledConstraint<TBuilder, TBuildConstraint>(_builder, scale, GetEase());
@@ -42,7 +40,7 @@ namespace Hybel
             public TBuildConstraint Triangle() => CreateConstraint(Interpolate.Triangle);
             public TBuildConstraint SmoothStep() => CreateConstraint(Interpolate.SmoothStep);
 
-            public EaseFunction GetEase() => Interpolate.Wrap;
+            public EaseFunction GetEase() => t => Interpolate.Flip(_modifier?.Invoke(t) ?? t, _threshold);
 
             private TBuildConstraint CreateConstraint(EaseFunction easeFunc) =>
                 (TBuildConstraint)Activator.CreateInstance(typeof(TBuildConstraint),

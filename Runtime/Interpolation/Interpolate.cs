@@ -1,12 +1,13 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Hybel
+namespace Hybel.Tweener
 {
+    public delegate T Interpolation<T>(T start, T end, float time);
+    public delegate float EaseFunction(float t);
+
     public partial class Interpolate
     {
-        public delegate float EaseFunction(float t);
-
         // Interpolator Functions
 
         // Scalar
@@ -1087,49 +1088,49 @@ namespace Hybel
         {
             return ease switch
             {
-                Hybel.Ease.Clamp => Clamp,
-                Hybel.Ease.Linear => Linear,
-                Hybel.Ease.SineIn => SineIn,
-                Hybel.Ease.SineOut => SineOut,
-                Hybel.Ease.SineInOut => SineInOut,
-                Hybel.Ease.QuadIn => QuadIn,
-                Hybel.Ease.QuadOut => QuadOut,
-                Hybel.Ease.QuadInOut => QuadInOut,
-                Hybel.Ease.CubeIn => CubeIn,
-                Hybel.Ease.CubeOut => CubeOut,
-                Hybel.Ease.CubeInOut => CubeInOut,
-                Hybel.Ease.QuartIn => QuartIn,
-                Hybel.Ease.QuartOut => QuartOut,
-                Hybel.Ease.QuartInOut => QuartInOut,
-                Hybel.Ease.QuintIn => QuintIn,
-                Hybel.Ease.QuintOut => QuintOut,
-                Hybel.Ease.QuintInOut => QuintInOut,
-                Hybel.Ease.SextIn => SextIn,
-                Hybel.Ease.SextOut => SextOut,
-                Hybel.Ease.SextInOut => SextInOut,
-                Hybel.Ease.SeptIn => SeptIn,
-                Hybel.Ease.SeptOut => SeptOut,
-                Hybel.Ease.SeptInOut => SeptInOut,
-                Hybel.Ease.OctIn => OctIn,
-                Hybel.Ease.OctOut => OctOut,
-                Hybel.Ease.OctInOut => OctInOut,
-                Hybel.Ease.ExpoIn => ExpoIn,
-                Hybel.Ease.ExpoOut => ExpoOut,
-                Hybel.Ease.ExpoInOut => ExpoInOut,
-                Hybel.Ease.CircIn => CircIn,
-                Hybel.Ease.CircOut => CircOut,
-                Hybel.Ease.CircInOut => CircInOut,
-                Hybel.Ease.BackIn => BackIn,
-                Hybel.Ease.BackOut => BackOut,
-                Hybel.Ease.BackInOut => BackInOut,
-                Hybel.Ease.ElasticIn => ElasticIn,
-                Hybel.Ease.ElasticOut => ElasticOut,
-                Hybel.Ease.ElasticInOut => ElasticInOut,
-                Hybel.Ease.BounceIn => BounceIn,
-                Hybel.Ease.BounceOut => BounceOut,
-                Hybel.Ease.BounceInOut => BounceInOut,
-                Hybel.Ease.Triangle => Triangle,
-                Hybel.Ease.SmoothStep => SmoothStep,
+                Hybel.Tweener.Ease.Clamp => Clamp,
+                Hybel.Tweener.Ease.Linear => Linear,
+                Hybel.Tweener.Ease.SineIn => SineIn,
+                Hybel.Tweener.Ease.SineOut => SineOut,
+                Hybel.Tweener.Ease.SineInOut => SineInOut,
+                Hybel.Tweener.Ease.QuadIn => QuadIn,
+                Hybel.Tweener.Ease.QuadOut => QuadOut,
+                Hybel.Tweener.Ease.QuadInOut => QuadInOut,
+                Hybel.Tweener.Ease.CubeIn => CubeIn,
+                Hybel.Tweener.Ease.CubeOut => CubeOut,
+                Hybel.Tweener.Ease.CubeInOut => CubeInOut,
+                Hybel.Tweener.Ease.QuartIn => QuartIn,
+                Hybel.Tweener.Ease.QuartOut => QuartOut,
+                Hybel.Tweener.Ease.QuartInOut => QuartInOut,
+                Hybel.Tweener.Ease.QuintIn => QuintIn,
+                Hybel.Tweener.Ease.QuintOut => QuintOut,
+                Hybel.Tweener.Ease.QuintInOut => QuintInOut,
+                Hybel.Tweener.Ease.SextIn => SextIn,
+                Hybel.Tweener.Ease.SextOut => SextOut,
+                Hybel.Tweener.Ease.SextInOut => SextInOut,
+                Hybel.Tweener.Ease.SeptIn => SeptIn,
+                Hybel.Tweener.Ease.SeptOut => SeptOut,
+                Hybel.Tweener.Ease.SeptInOut => SeptInOut,
+                Hybel.Tweener.Ease.OctIn => OctIn,
+                Hybel.Tweener.Ease.OctOut => OctOut,
+                Hybel.Tweener.Ease.OctInOut => OctInOut,
+                Hybel.Tweener.Ease.ExpoIn => ExpoIn,
+                Hybel.Tweener.Ease.ExpoOut => ExpoOut,
+                Hybel.Tweener.Ease.ExpoInOut => ExpoInOut,
+                Hybel.Tweener.Ease.CircIn => CircIn,
+                Hybel.Tweener.Ease.CircOut => CircOut,
+                Hybel.Tweener.Ease.CircInOut => CircInOut,
+                Hybel.Tweener.Ease.BackIn => BackIn,
+                Hybel.Tweener.Ease.BackOut => BackOut,
+                Hybel.Tweener.Ease.BackInOut => BackInOut,
+                Hybel.Tweener.Ease.ElasticIn => ElasticIn,
+                Hybel.Tweener.Ease.ElasticOut => ElasticOut,
+                Hybel.Tweener.Ease.ElasticInOut => ElasticInOut,
+                Hybel.Tweener.Ease.BounceIn => BounceIn,
+                Hybel.Tweener.Ease.BounceOut => BounceOut,
+                Hybel.Tweener.Ease.BounceInOut => BounceInOut,
+                Hybel.Tweener.Ease.Triangle => Triangle,
+                Hybel.Tweener.Ease.SmoothStep => SmoothStep,
                 _ => Linear,
             };
         }
@@ -1190,6 +1191,8 @@ namespace Hybel
         public static float ScaleUp(float t, float scale) => t * scale;
         public static float ScaleDown(float t, float scale) => t / scale;
 
+        public static float Reverse(EaseFunction easeFunction, float t) => Flip(easeFunction(Flip(t)));
+        
         private static float Clamp01(float t) => Mathf.Clamp01(t);
 
         public struct BiLerpData<T>

@@ -1,4 +1,6 @@
-﻿namespace Hybel
+﻿using System;
+
+namespace Hybel.Tweener
 {
     public enum Ease
     {
@@ -93,5 +95,72 @@
         Triangle,
         SmoothStep,
         Curve,
+    }
+
+    public static class EaseExtensions
+    {
+        public static Ease Reverse(this Ease ease) =>
+            ease switch
+            {
+                Ease.SineIn => Ease.SineOut,
+                Ease.SineOut => Ease.SineIn,
+                Ease.QuadIn => Ease.QuadOut,
+                Ease.QuadOut => Ease.QuadIn,
+                Ease.CubeIn => Ease.CubeOut,
+                Ease.CubeOut => Ease.CubeIn,
+                Ease.QuartIn => Ease.QuartOut,
+                Ease.QuartOut => Ease.QuartIn,
+                Ease.QuintIn => Ease.QuintOut,
+                Ease.QuintOut => Ease.QuintIn,
+                Ease.SextIn => Ease.SextOut,
+                Ease.SextOut => Ease.SextIn,
+                Ease.SeptIn => Ease.SeptOut,
+                Ease.SeptOut => Ease.SeptIn,
+                Ease.OctIn => Ease.OctOut,
+                Ease.OctOut => Ease.OctIn,
+                Ease.ExpoIn => Ease.ExpoOut,
+                Ease.ExpoOut => Ease.ExpoIn,
+                Ease.CircIn => Ease.CircOut,
+                Ease.CircOut => Ease.CircIn,
+                Ease.BackIn => Ease.BackOut,
+                Ease.BackOut => Ease.BackIn,
+                Ease.ElasticIn => Ease.ElasticOut,
+                Ease.ElasticOut => Ease.ElasticIn,
+                Ease.BounceIn => Ease.BounceOut,
+                Ease.BounceOut => Ease.BounceIn,
+                _ => ease
+            };
+        
+        public static EaseOrCurve Reverse(this EaseOrCurve easeOrCurve) =>
+            easeOrCurve switch
+            {
+                EaseOrCurve.SineIn => EaseOrCurve.SineOut,
+                EaseOrCurve.SineOut => EaseOrCurve.SineIn,
+                EaseOrCurve.QuadIn => EaseOrCurve.QuadOut,
+                EaseOrCurve.QuadOut => EaseOrCurve.QuadIn,
+                EaseOrCurve.CubeIn => EaseOrCurve.CubeOut,
+                EaseOrCurve.CubeOut => EaseOrCurve.CubeIn,
+                EaseOrCurve.QuartIn => EaseOrCurve.QuartOut,
+                EaseOrCurve.QuartOut => EaseOrCurve.QuartIn,
+                EaseOrCurve.QuintIn => EaseOrCurve.QuintOut,
+                EaseOrCurve.QuintOut => EaseOrCurve.QuintIn,
+                EaseOrCurve.SextIn => EaseOrCurve.SextOut,
+                EaseOrCurve.SextOut => EaseOrCurve.SextIn,
+                EaseOrCurve.SeptIn => EaseOrCurve.SeptOut,
+                EaseOrCurve.SeptOut => EaseOrCurve.SeptIn,
+                EaseOrCurve.OctIn => EaseOrCurve.OctOut,
+                EaseOrCurve.OctOut => EaseOrCurve.OctIn,
+                EaseOrCurve.ExpoIn => EaseOrCurve.ExpoOut,
+                EaseOrCurve.ExpoOut => EaseOrCurve.ExpoIn,
+                EaseOrCurve.CircIn => EaseOrCurve.CircOut,
+                EaseOrCurve.CircOut => EaseOrCurve.CircIn,
+                EaseOrCurve.BackIn => EaseOrCurve.BackOut,
+                EaseOrCurve.BackOut => EaseOrCurve.BackIn,
+                EaseOrCurve.ElasticIn => EaseOrCurve.ElasticOut,
+                EaseOrCurve.ElasticOut => EaseOrCurve.ElasticIn,
+                EaseOrCurve.BounceIn => EaseOrCurve.BounceOut,
+                EaseOrCurve.BounceOut => EaseOrCurve.BounceIn,
+                _ => easeOrCurve
+            };
     }
 }

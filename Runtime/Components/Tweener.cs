@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Hybel
+namespace Hybel.Tweener
 {
     public class Tweener : MonoBehaviour, ILerpProvider
     {
@@ -16,8 +16,8 @@ namespace Hybel
         [Space]
         public UnityEvent<float> ValueChanged;
 
-        protected Interpolate.EaseFunction _easeInFunction;
-        protected Interpolate.EaseFunction _easeOutFunction;
+        protected EaseFunction _easeInFunction;
+        protected EaseFunction _easeOutFunction;
 
         private float _currentValue;
         private Coroutine _currentRoutine;
@@ -34,8 +34,8 @@ namespace Hybel
 
         public bool IsPlaying { get; private set; }
 
-        protected Interpolate.EaseFunction easeInFunction => _easeInFunction;
-        protected Interpolate.EaseFunction easeOutFunction => _easeOutFunction;
+        protected EaseFunction easeInFunction => _easeInFunction;
+        protected EaseFunction easeOutFunction => _easeOutFunction;
 
         protected virtual void Awake()
         {
